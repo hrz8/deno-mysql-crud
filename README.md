@@ -53,6 +53,7 @@ GET      /api/authors         # get authors list
 GET      /api/authors/:id     # get author data by id
 POST     /api/authors         # create new author
 PUT      /api/authors/:id     # update author data by id
+DELETE   /api/authors/:id     # delete author data by id
 ```
 
 ## App Info

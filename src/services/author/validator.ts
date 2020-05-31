@@ -102,5 +102,9 @@ export default {
         }
 
         return { id: Number(id), body };
+    },
+
+    remove(ctx: any, paramsData: any) {
+        return this.get(ctx, paramsData);
     }
 }

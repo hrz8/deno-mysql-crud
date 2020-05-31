@@ -9,6 +9,18 @@ const port: any = CONFIG.server.port;
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-console.log(`Server running on port ${port}`);
+app.use((ctx: any) => {
+    ctx.response.status = 404;
+    ctx.response.body = {
+        status: 404,
+        message: '404 - endpoint not found'
+    }
+});
+
+app.addEventListener('listen', ({ secure, hostname, port }) => {
+    const protocol = secure ? 'https://' : 'http://';
+    const url = `${protocol}${hostname ?? '127.0.0.1'}:${port}`;
+    console.log(`listening on: ${url}`);
+});
 
 await app.listen({ port: Number(port) });

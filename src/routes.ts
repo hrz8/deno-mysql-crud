@@ -9,5 +9,6 @@ router
     .get('/api/authors', authorController.list)
     .get('/api/authors/:id', authorController.get)
     .put('/api/authors/:id', authorController.update)
+    .delete('/api/authors/:id', authorController.remove)
 
 export default router;

@@ -13,26 +13,26 @@ export default {
         if (!validatedBody) return;
 
         // - store data to db
-        const author: Author = await repository.create(validatedBody);
+        const newRecord: Author = await repository.create(validatedBody);
 
         // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
-            data: author,
+            data: newRecord,
             message: 'success create author'
         };
     },
 
     async list(ctx: any) {
         // - get data from db
-        const authors: Array<Author>|any = await repository.list();
+        const records: Array<Author>|any = await repository.list();
         
         // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
-            data: authors,
+            data: records,
             message: 'success list authors'
         };
     },
@@ -47,8 +47,8 @@ export default {
 
         // - get data from db
         const { id } = validatedParams;
-        const author: Author|undefined = await repository.get(id);
-        if (!author) {
+        const record: Author|undefined = await repository.get(id);
+        if (!record) {
             error.notFound(ctx, id);
             return;
         }
@@ -57,7 +57,7 @@ export default {
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
-            data: author,
+            data: record,
             message: 'success get author'
         };
     },
@@ -75,21 +75,49 @@ export default {
 
         // - get data from db
         const { id, body: validatedBody } = validatedReq;
-        const author: Author|undefined = await repository.get(id);
-        if (!author) {
+        const record: Author|undefined = await repository.get(id);
+        if (!record) {
             error.notFound(ctx, id);
             return;
         }
 
         // - update data in db
-        const updatedAuthor: Author = await repository.update(id, validatedBody);
+        const updated: Author = await repository.update(id, validatedBody);
 
         // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
-            data: updatedAuthor,
+            data: updated,
             message: 'success update author'
+        };
+    },
+
+    async remove(ctx: any) {
+        // - get params data
+        const params = ctx.params;
+
+        // - validating params data
+        const validatedParams: any = validator.remove(ctx, params);
+        if (!validatedParams) return;
+
+        // - get data from db
+        const { id } = validatedParams;
+        const record: Author|undefined = await repository.get(id);
+        if (!record) {
+            error.notFound(ctx, id);
+            return;
+        }
+
+        // - delete data from db
+        const deleted: Author = await repository.remove(id);
+
+        // - responding the request
+        ctx.response.status = 200;
+        ctx.response.body = {
+            status: 200,
+            data: deleted,
+            message: 'success remove author'
         };
     }
 }

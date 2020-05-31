@@ -42,5 +42,15 @@ export default {
             .toString();
         const result = await client.execute(query);
         return this.get(id);
+    },
+
+    async remove(id: number|undefined): Promise<Author> {
+        const query = dex.queryBuilder()
+            .from(tableName)
+            .delete()
+            .where({ id })
+            .toString();
+        const result = await client.execute(query);
+        return this.get(id);
     }
 }
