@@ -1,10 +1,10 @@
 interface Author {
     id?: number;
-    firstName: string;
+    firstName?: string;
     lastName?: string;
-    email: string;
-    phoneNumber: string;
-    address: string;
+    email?: string;
+    phoneNumber?: string;
+    address?: string;
 }
 
 const tableName = 'authors';

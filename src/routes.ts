@@ -8,5 +8,6 @@ router
     .post('/api/authors', authorController.create)
     .get('/api/authors', authorController.list)
     .get('/api/authors/:id', authorController.get)
+    .put('/api/authors/:id', authorController.update)
 
 export default router;

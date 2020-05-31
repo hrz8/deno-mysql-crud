@@ -32,5 +32,15 @@ export default {
             .toString();
         const result = await client.execute(query);
         return result.rows ? result.rows[0] : undefined;
+    },
+
+    async update(id: number|undefined, author: Author): Promise<Author> {
+        const query = dex.queryBuilder()
+            .from(tableName)
+            .update(author)
+            .where({ id })
+            .toString();
+        const result = await client.execute(query);
+        return this.get(id);
     }
 }

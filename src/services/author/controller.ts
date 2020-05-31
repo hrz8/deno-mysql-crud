@@ -5,11 +5,17 @@ import error from './error.ts';
 
 export default {
     async create(ctx: any) {
-        const payload: Author|undefined = await validator.create(ctx);
-        if (!payload) {
-            return;
-        }
-        const author: Author = await repository.create(payload);
+        // - get body data
+        const body = await ctx.request.body();
+
+        // - validating body data
+        const validatedBody: Author|undefined = validator.create(ctx, body);
+        if (!validatedBody) return;
+
+        // - store data to db
+        const author: Author = await repository.create(validatedBody);
+
+        // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
@@ -19,7 +25,10 @@ export default {
     },
 
     async list(ctx: any) {
+        // - get data from db
         const authors: Array<Author>|any = await repository.list();
+        
+        // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
@@ -29,17 +38,58 @@ export default {
     },
 
     async get(ctx: any) {
-        const authorId: number = Number(ctx.params.id);
-        const author: any = await repository.get(authorId);
+        // - get params data
+        const params = ctx.params;
+
+        // - validating params data
+        const validatedParams: any = validator.get(ctx, params);
+        if (!validatedParams) return;
+
+        // - get data from db
+        const { id } = validatedParams;
+        const author: Author|undefined = await repository.get(id);
         if (!author) {
-            error.notFound(ctx, authorId);
+            error.notFound(ctx, id);
             return;
         }
+
+        // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
             data: author,
             message: 'success get authors'
+        };
+    },
+
+    async update(ctx: any) {
+        // - get params data
+        const params = ctx.params;
+        
+        // - get body data
+        const body = await ctx.request.body();
+
+        // - validating body data
+        const validatedReq: any = validator.update(ctx, params, body);
+        if (!validatedReq) return;
+
+        // - get data from db
+        const { id, body: validatedBody } = validatedReq;
+        const author: Author|undefined = await repository.get(id);
+        if (!author) {
+            error.notFound(ctx, id);
+            return;
+        }
+
+        // - update data in db
+        const updatedAuthor: Author = await repository.update(id, validatedBody);
+        
+        // - responding the request
+        ctx.response.status = 200;
+        ctx.response.body = {
+            status: 200,
+            data: updatedAuthor,
+            message: 'success update authors'
         };
     }
 }
