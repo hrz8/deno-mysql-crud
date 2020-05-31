@@ -3,10 +3,10 @@ import config from '../config.ts'
 
 const CONFIG = config[Deno.env.get('DENO_ENV') || 'dev'];
 const client: Client = await new Client().connect({
-  hostname: CONFIG.db.host,
-  port: CONFIG.db.port,
-  username: CONFIG.db.user,
-  password: CONFIG.db.password
+    hostname: CONFIG.db.host,
+    port: CONFIG.db.port,
+    username: CONFIG.db.user,
+    password: CONFIG.db.password
 });
 
 // deno run --allow-env --allow-net database/init.ts create
