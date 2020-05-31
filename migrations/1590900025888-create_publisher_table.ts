@@ -8,7 +8,7 @@ export const up = (): string => {
         table.increments();
         table.string('name').notNullable();
         table.string('email').notNullable();
-        table.string('phoneNumber').notNullable();
+        table.string('phone_number').notNullable();
         table.text('address').notNullable();
         table.timestamps(true, true);
     }).toString();

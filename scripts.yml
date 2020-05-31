@@ -2,3 +2,5 @@ scripts:
   db:create: deno run --allow-net --allow-env database/init.ts create
   db:drop: deno run --allow-net --allow-env database/init.ts drop
   db:migrate: deno run --allow-net --allow-read --allow-env https://deno.land/x/nessie@v0.5.0/cli.ts migrate
+  server:dev: denon run --allow-env --allow-net src/server.ts
+  server:run: deno run --allow-env --allow-net src/server.ts

@@ -7,11 +7,11 @@ const CONFIG = config[Deno.env.get('DENO_ENV') || 'dev'];
 
 const clientConfig: any = {
     client: new ClientMySQL(migrationFolder, {
-      hostname: CONFIG.db.host,
-      port: CONFIG.db.port,
-      username: CONFIG.db.user,
-      password: CONFIG.db.password,
-      db: CONFIG.db.name,
+        hostname: CONFIG.db.host,
+        port: CONFIG.db.port,
+        username: CONFIG.db.user,
+        password: CONFIG.db.password,
+        db: CONFIG.db.name,
     }),
   };
 
