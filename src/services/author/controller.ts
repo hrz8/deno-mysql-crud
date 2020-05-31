@@ -1,32 +1,45 @@
 import { Author } from './model.ts';
 import repository from './repository.ts';
 import validator from './validator.ts';
+import error from './error.ts';
 
 export default {
     async create(ctx: any) {
-        const newAuthor: Author|undefined = await validator.create(ctx);
-        if (!newAuthor) {
+        const payload: Author|undefined = await validator.create(ctx);
+        if (!payload) {
             return;
         }
-        const authorId: number|undefined = await repository.create(newAuthor);
-        const author: any = await repository.get(Number(authorId));
-        ctx.response.body = author;
+        const author: Author = await repository.create(payload);
+        ctx.response.status = 200;
+        ctx.response.body = {
+            status: 200,
+            data: author,
+            message: 'success create authors'
+        };
     },
 
     async list(ctx: any) {
         const authors: Array<Author>|any = await repository.list();
-        if (!authors) {
-            
-        }
-        ctx.response.body = authors;
+        ctx.response.status = 200;
+        ctx.response.body = {
+            status: 200,
+            data: authors,
+            message: 'success list authors'
+        };
     },
 
     async get(ctx: any) {
-        const authorId = ctx.params.id;
-        const author: any = await repository.get(Number(authorId));
+        const authorId: number = Number(ctx.params.id);
+        const author: any = await repository.get(authorId);
         if (!author) {
-
+            error.notFound(ctx, authorId);
+            return;
         }
-        ctx.response.body = author;
+        ctx.response.status = 200;
+        ctx.response.body = {
+            status: 200,
+            data: author,
+            message: 'success get authors'
+        };
     }
 }

@@ -6,31 +6,31 @@ const dex = Dex({client: 'mysql'});
 const client = await dbConn();
 
 export default {
-    async create(author: Author) {
+    async create(author: Author): Promise<Author> {
         const query = dex.queryBuilder()
             .insert([author])
             .into(tableName)
             .toString();
-        const newData = await client.execute(query);
-        return newData.lastInsertId;
+        const result = await client.execute(query);
+        return this.get(result.lastInsertId);
     },
 
-    async list() {
+    async list(): Promise<Array<Author>|Array<any>|undefined> {
         const query = dex.queryBuilder()
             .select('*')
             .from(tableName)
             .toString();
-        const { rows } = await client.execute(query);
-        return rows || undefined;
+        const result = await client.execute(query);
+        return result.rows;
     },
 
-    async get(id: number) {
+    async get(id: number|undefined): Promise<Author> {
         const query = dex.queryBuilder()
             .select()
             .from(tableName)
             .where({ id })
             .toString();
-        const { rows } = await client.execute(query);
-        return rows ? rows[0] : undefined;
+        const result = await client.execute(query);
+        return result.rows ? result.rows[0] : undefined;
     }
 }
