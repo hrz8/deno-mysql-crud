@@ -40,6 +40,13 @@ $ vr server:run
 
 ## Usage
 
+### Configuration
+modify `config.ts` file to change the default configuration
+```
+SERVER: 127.0.0.1:6790
+DB: 127.0.0.1:3306 -u root -p toor
+```
+
 ### Endpoints
 ```
 GET      /api/authors         # get authors list

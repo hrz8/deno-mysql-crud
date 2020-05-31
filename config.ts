@@ -6,15 +6,21 @@ const config: any = {
             user: Deno.env.get('DB_USERNAME') || 'root',
             password: Deno.env.get('DB_PASSWORD') || 'toor',
             name: 'books_dev',
+        },
+        server: {
+            port: Deno.env.get('DENO_PORT') || 6790
         }
     },
-    production: {
+    prod: {
         db: {
             host: Deno.env.get('DB_HOST'),
             port: Deno.env.get('DB_PORT'),
             user: Deno.env.get('DB_USERNAME'),
             password: Deno.env.get('DB_PASSWORD'),
             name: 'books_prod'
+        },
+        server: {
+            port: Deno.env.get('DENO_PORT')
         }
     }
 };

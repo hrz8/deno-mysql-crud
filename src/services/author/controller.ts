@@ -20,7 +20,7 @@ export default {
         ctx.response.body = {
             status: 200,
             data: author,
-            message: 'success create authors'
+            message: 'success create author'
         };
     },
 
@@ -58,7 +58,7 @@ export default {
         ctx.response.body = {
             status: 200,
             data: author,
-            message: 'success get authors'
+            message: 'success get author'
         };
     },
 
@@ -83,13 +83,13 @@ export default {
 
         // - update data in db
         const updatedAuthor: Author = await repository.update(id, validatedBody);
-        
+
         // - responding the request
         ctx.response.status = 200;
         ctx.response.body = {
             status: 200,
             data: updatedAuthor,
-            message: 'success update authors'
+            message: 'success update author'
         };
     }
 }
