@@ -1,4 +1,4 @@
-# Simple Deno Restfull API using MySQL
+# Simple Deno Restful API using MySQL
 
 ## Quick Start
 
@@ -49,11 +49,19 @@ DB: 127.0.0.1:3306 -u root -p toor
 
 ### Endpoints
 ```
-GET      /api/authors         # get authors list
-GET      /api/authors/:id     # get author data by id
-POST     /api/authors         # create new author
-PUT      /api/authors/:id     # update author data by id
-DELETE   /api/authors/:id     # delete author data by id
+// author
+GET      /api/authors           # get authors list
+GET      /api/authors/:id       # get author data by id
+POST     /api/authors           # create new author
+PUT      /api/authors/:id       # update author data by id
+DELETE   /api/authors/:id       # delete author data by id
+
+// publisher
+GET      /api/publishers         # get authors list
+GET      /api/publishers/:id     # get author data by id
+POST     /api/publishers         # create new author
+PUT      /api/publishers/:id     # update author data by id
+DELETE   /api/publishers/:id     # delete author data by id
 ```
 
 ## App Info

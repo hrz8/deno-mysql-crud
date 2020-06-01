@@ -1,4 +1,4 @@
-const requiredFields = ['first_name', 'email', 'phone_number', 'address'];
+const requiredFields = ['name', 'email', 'phone_number', 'address'];
 
 export default {
     create(ctx: any, bodyData: any) {

@@ -1,15 +1,14 @@
-interface Author {
+interface Publisher {
     id?: number;
-    firstName?: string;
-    lastName?: string;
+    name?: string;
     email?: string;
     phoneNumber?: string;
     address?: string;
 }
 
-const tableName = 'authors';
+const tableName = 'publishers';
 
 export {
-    Author,
+    Publisher,
     tableName
 }
