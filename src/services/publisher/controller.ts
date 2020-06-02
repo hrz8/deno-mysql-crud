@@ -3,6 +3,7 @@ import repository from './repository.ts';
 import validator from './validator.ts';
 import error from './error.ts';
 
+const controllerName = 'publisher';
 export default {
   async create(ctx: any) {
     // - get body data
@@ -20,7 +21,7 @@ export default {
     ctx.response.body = {
       status: 200,
       data: newRecord,
-      message: 'success create publisher',
+      message: `success create ${controllerName}`,
     };
   },
 
@@ -33,7 +34,7 @@ export default {
     ctx.response.body = {
       status: 200,
       data: records,
-      message: 'success list publishers',
+      message: `success list ${controllerName}s`,
     };
   },
 
@@ -58,7 +59,7 @@ export default {
     ctx.response.body = {
       status: 200,
       data: record,
-      message: 'success get publisher',
+      message: `success get ${controllerName}`,
     };
   },
 
@@ -89,7 +90,7 @@ export default {
     ctx.response.body = {
       status: 200,
       data: updated,
-      message: 'success update publisher',
+      message: `success update ${controllerName}`,
     };
   },
 
@@ -117,7 +118,7 @@ export default {
     ctx.response.body = {
       status: 200,
       data: deleted,
-      message: 'success remove publisher',
+      message: `success remove ${controllerName}`,
     };
   },
 };
